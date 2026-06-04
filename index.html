@@ -61,6 +61,7 @@
   .empty .big-emoji { font-size: 40px; display: block; margin-bottom: 10px; }
   
   .deal-item {
+    cursor: pointer;
     background: var(--card); border-radius: 8px; padding: 12px 14px; margin-bottom: 8px;
     box-shadow: 0 1px 3px rgba(0,0,0,.08); display: flex; align-items: center; gap: 10px;
     border-left: 3px solid var(--border);
@@ -194,6 +195,12 @@ const ALL_CITIES = [
   "兰州","乌鲁木齐","绍兴","泉州","南通","嘉兴","金华","徐州","台州","三亚"
 ];
 
+const URL_MAP = {
+  '美团': 'https://i.meituan.com/search?keyword=滨寿司',
+  '大众点评': 'https://www.dianping.com/search/keyword/0_0_%E6%BB%A8%E5%AF%BF%E5%8F%B8',
+  '闲鱼': 'https://2.taobao.com/search?q=%E6%BB%A8%E5%AF%BF%E5%8F%B8',
+  '小红书': 'https://www.xiaohongshu.com/search_result?keyword=%E6%BB%A8%E5%AF%BF%E5%8F%B8'
+};
 const SOURCE_ICONS = {'美团':'🛵','大众点评':'📝','闲鱼':'🐟','小红书':'📕'};
 const CITY_KEY = 'hamsushi_city';
 
@@ -299,7 +306,7 @@ function render() {
       (limitedItems.length ? `
         <div class="section-label">⏰ 限时活动（更新于${DEALS_DATA.updated_at}）</div>
         ${limitedItems.map(d => `
-          <div class="deal-item is-limited source-${d.source}">
+          <div class="deal-item is-limited source-${d.source}" onclick="window.open(URL_MAP['${d.source}']||'#','_blank')">
             <div class="deal-icon">${SOURCE_ICONS[d.source]||'📌'}</div>
             <div class="deal-body">
               <div class="deal-title">${d.title}</div>
@@ -317,7 +324,7 @@ function render() {
       (regActive.length ? `
         <div class="section-label">📌 长期优惠</div>
         ${regActive.map(d => `
-          <div class="deal-item source-${d.source}${d.is_best?' is-best':''}">
+          <div class="deal-item source-${d.source}${d.is_best?' is-best':''}" onclick="window.open(URL_MAP['${d.source}']||'#','_blank')">
             <div class="deal-icon">${SOURCE_ICONS[d.source]||'📌'}</div>
             <div class="deal-body">
               <div class="deal-title">${d.title}</div>
@@ -335,7 +342,7 @@ function render() {
       (regExpired.length ? `
         <div class="section-label" style="color:#ccc;margin-top:8px;">已过期</div>
         ${regExpired.map(d => `
-          <div class="deal-item source-${d.source}" style="opacity:.4;">
+          <div class="deal-item source-${d.source}" style="opacity:.4;" onclick="window.open(URL_MAP['${d.source}']||'#','_blank')">
             <div class="deal-icon">${SOURCE_ICONS[d.source]||'📌'}</div>
             <div class="deal-body">
               <div class="deal-title" style="text-decoration:line-through;">${d.title}</div>
