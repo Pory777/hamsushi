@@ -220,6 +220,7 @@ function render() {
     document.getElementById('heroDesc').textContent = best.detail || '';
     document.getElementById('heroFrom').textContent = '来源：' + best.src;
     document.getElementById('heroExpires').textContent = fmtExp(best.expire) ? '· ' + fmtExp(best.expire) : '';
+    document.getElementById('heroCTA').textContent = best.url ? '立即去购买 →' : '暂无购买链接';
     hero.onclick = () => { if(best.url) go(best); };
   } else {
     hero.style.display = 'none';
