@@ -152,10 +152,10 @@ const DEALS = {
   "updated":"2026-06-04",
   "list":[
     // ===== 短期限时（核心竞争力） =====
-    {id:"mt-hot1", src:"美团", title:"端午节满200减50", detail:"限时3天 6.10-6.12", badge:"⏰限时", expire:"2026-06-12", best:true, url:"https://i.meituan.com/search?keyword=滨寿司"},
-    {id:"dp-hot1", src:"大众点评", title:"618狂欢6折畅吃", detail:"6月18日截止，手慢无", badge:"⏰限时", expire:"2026-06-18", best:false, url:"https://www.dianping.com/search/keyword/0_0_%E6%BB%A8%E5%AF%BF%E5%8F%B8"},
-    {id:"xhs-hot1", src:"小红书", title:"评论区抽10张免单", detail:"关注+评论，6月15日开奖", badge:"⏰限时", expire:"2026-06-15", best:false, url:"https://www.xiaohongshu.com/search_result?keyword=滨寿司"},
-    {id:"sh-hot1", src:"美团", title:"上海·人民广场新店买1送1", detail:"6月整月，仅限人民广场店", city:"上海", badge:"⏰限时", expire:"2026-06-30", best:false, url:"https://i.meituan.com/search?keyword=滨寿司"},
+    {id:"mt-hot1", src:"美团", title:"端午节满200减50", detail:"限时3天 6.10-6.12", badge:"⏰限时", expire:"2026-06-12", best:true},
+    {id:"dp-hot1", src:"大众点评", title:"618狂欢6折畅吃", detail:"6月18日截止，手慢无", badge:"⏰限时", expire:"2026-06-18", best:false},
+    {id:"xhs-hot1", src:"小红书", title:"评论区抽10张免单", detail:"关注+评论，6月15日开奖", badge:"⏰限时", expire:"2026-06-15", best:false},
+    {id:"sh-hot1", src:"美团", title:"上海·人民广场新店买1送1", detail:"6月整月，仅限人民广场店", city:"上海", badge:"⏰限时", expire:"2026-06-30", best:false},
     {id:"bj-hot1", src:"美团", title:"北京·望京店晚市7折", detail:"每周三四晚8点后", city:"北京", badge:"⏰限时", expire:"2026-07-01", best:false},
     // ===== 长期优惠（保底） =====
     {id:"mt-001", src:"美团", title:"满100减20", detail:"全场通用，新老不限", expire:"2027-12-31", best:false},
@@ -178,8 +178,7 @@ function isExp(d) { if(!d) return false; const p=d.split('-'); return new Date(+
 function fmtExp(d) { if(!d) return ''; const p=d.split('-'); const dt=new Date(+p[0],+p[1]-1,+p[2]); const diff=Math.ceil((dt-new Date())/86400000); if(diff<0) return '已过期'; if(diff===0) return '今天到期'; if(diff===1) return '明天到期'; if(diff<=7) return diff+'天后到期'; return '~'+d; }
 
 function go(d) {
-  const u = d.url || '';
-  if (u) window.open(u, '_blank');
+  if (d.url) { window.open(d.url, '_blank'); }
 }
 
 function render() {
@@ -221,7 +220,7 @@ function render() {
     document.getElementById('heroDesc').textContent = best.detail || '';
     document.getElementById('heroFrom').textContent = '来源：' + best.src;
     document.getElementById('heroExpires').textContent = fmtExp(best.expire) ? '· ' + fmtExp(best.expire) : '';
-    hero.onclick = () => go(best);
+    hero.onclick = () => { if(best.url) go(best); };
   } else {
     hero.style.display = 'none';
   }
@@ -237,11 +236,11 @@ function render() {
     if (d.best && !exp) tags.push(`<span class="tag best">💰 最低价</span>`);
     tags.push(`<span class="tag exp">${fmtExp(d.expire)||'长期有效'}</span>`);
     return `
-      <div class="deal-card ${srcCls} ${cls}" onclick="go(DEALS.list.find(x=>x.id==='${d.id}'))">
+      <div class="deal-card ${srcCls} ${cls}" onclick="if(DEALS.list.find(x=>x.id==='${d.id}').url) go(DEALS.list.find(x=>x.id==='${d.id}'))">
         <div class="deal-row">
           <div class="deal-icon">${ICONS[d.src]||'📌'}</div>
           <div class="deal-body">
-            <div class="deal-title">${d.title}${d.url ? ' 🔗' : ''}</div>
+            <div class="deal-title">${d.title}</div>
             <div class="deal-detail">${d.detail||''}</div>
             <div class="deal-tags">${tags.join('')}</div>
           </div>
