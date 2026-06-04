@@ -8,23 +8,21 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
     --red: #d32f2f; --red-light: #ffebee; --red-dark: #b71c1c;
-    --orange: #ff6f00; --gold: #ffa000; --purple: #7b1fa2;
+    --orange: #ff6f00; --purple: #7b1fa2;
     --bg: #f5f5f5; --card: #ffffff;
     --text: #212121; --text2: #616161; --text3: #9e9e9e;
     --border: #e0e0e0; --radius: 10px;
     --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "PingFang SC", sans-serif;
   }
-  body {
-    font: 14px/1.5 var(--font); color: var(--text);
-    background: var(--bg); min-height: 100vh;
-    -webkit-font-smoothing: antialiased;
-  }
+  body { font: 14px/1.5 var(--font); color: var(--text); background: var(--bg); min-height: 100vh; -webkit-font-smoothing: antialiased; }
   .container { max-width: 480px; margin: 0 auto; padding: 12px; }
+  
   .header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
   .header-icon { font-size: 28px; }
   .header-text { flex: 1; }
   .header-text h1 { font-size: 17px; font-weight: 700; }
   .header-sub { font-size: 11px; color: var(--text3); }
+  
   .best-banner {
     background: linear-gradient(135deg, var(--red-dark), var(--red));
     color: #fff; border-radius: var(--radius); padding: 12px 14px; margin-bottom: 10px;
@@ -36,64 +34,42 @@
   .best-source { font-size: 11px; opacity: .8; }
   .best-title { font-size: 15px; font-weight: 700; }
   .best-expires { font-size: 11px; opacity: .7; }
-  .best-link { background: rgba(255,255,255,.2); padding: 5px 10px; border-radius: 5px; font-size: 12px; font-weight: 600; white-space: nowrap; color: #fff !important; text-decoration: none; }
+  .best-link { background: rgba(255,255,255,.2); padding: 5px 10px; border-radius: 5px; font-size: 12px; font-weight: 600; white-space: nowrap; color: #fff; text-decoration: none; }
+  
   .stats { display: flex; gap: 6px; margin-bottom: 8px; }
   .stat-item { flex: 1; background: var(--card); border-radius: 8px; padding: 8px 0; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
   .stat-num { font-size: 20px; font-weight: 700; color: var(--red); display: block; }
   .stat-label { font-size: 11px; color: var(--text3); }
+  
   .toolbar { display: flex; gap: 6px; margin-bottom: 8px; align-items: center; }
-  .search-box {
-    flex: 1; display: flex; align-items: center;
-    background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 0 10px;
-    box-shadow: 0 1px 3px rgba(0,0,0,.08);
-  }
+  .search-box { flex: 1; display: flex; align-items: center; background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 0 10px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
   .search-icon { font-size: 14px; margin-right: 6px; }
-  .search-box input {
-    flex: 1; border: none; background: transparent; padding: 9px 0; font-size: 14px;
-    font-family: inherit; outline: none; color: var(--text);
-  }
+  .search-box input { flex: 1; border: none; background: transparent; padding: 9px 0; font-size: 14px; font-family: inherit; outline: none; color: var(--text); -webkit-user-select: text; }
   .search-box input::placeholder { color: var(--text3); }
   .city-group { display: flex; gap: 4px; align-items: center; }
-  .city-group select {
-    padding: 9px 6px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px;
-    font-family: inherit; background: var(--card); color: var(--text); cursor: pointer;
-    outline: none; max-width: 80px; box-shadow: 0 1px 3px rgba(0,0,0,.08);
-  }
-  .btn-locate {
-    width: 34px; height: 34px; border: 1px solid var(--border); background: var(--card);
-    border-radius: 8px; font-size: 16px; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 1px 3px rgba(0,0,0,.08); transition: all .15s;
-  }
+  .city-group select { padding: 9px 6px; border: 1px solid var(--border); border-radius: 8px; font-size: 12px; font-family: inherit; background: var(--card); color: var(--text); cursor: pointer; outline: none; max-width: 90px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  .btn-locate { width: 34px; height: 34px; border: 1px solid var(--border); background: var(--card); border-radius: 8px; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  
   .filter-bar { display: flex; gap: 5px; margin-bottom: 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .filter-bar::-webkit-scrollbar { display: none; }
-  .filter-btn {
-    padding: 6px 14px; border: 1px solid var(--border); background: var(--card);
-    border-radius: 16px; font-size: 13px; font-family: inherit; cursor: pointer;
-    white-space: nowrap; color: var(--text2); transition: all .15s;
-  }
+  .filter-btn { padding: 6px 14px; border: 1px solid var(--border); background: var(--card); border-radius: 16px; font-size: 13px; font-family: inherit; cursor: pointer; white-space: nowrap; color: var(--text2); }
   .filter-btn.active { background: var(--red); color: #fff; border-color: var(--red); }
-  .section-label {
-    font-size: 12px; font-weight: 600; color: var(--text2);
-    padding: 6px 0 4px; margin-top: 4px;
-  }
+  
+  .section-label { font-size: 12px; font-weight: 600; color: var(--text2); padding: 6px 0 4px; margin-top: 4px; }
   .deal-list { margin-bottom: 10px; }
-  .loading, .empty { text-align: center; color: var(--text3); padding: 40px 20px; font-size: 13px; line-height: 1.8; }
+  .empty { text-align: center; color: var(--text3); padding: 40px 20px; font-size: 13px; line-height: 1.8; }
   .empty .big-emoji { font-size: 40px; display: block; margin-bottom: 10px; }
+  
   .deal-item {
     background: var(--card); border-radius: 8px; padding: 12px 14px; margin-bottom: 8px;
     box-shadow: 0 1px 3px rgba(0,0,0,.08); display: flex; align-items: center; gap: 10px;
-    cursor: pointer; border-left: 3px solid var(--border); transition: transform .1s;
+    border-left: 3px solid var(--border);
   }
-  .deal-item:active { transform: scale(.98); }
   .deal-item.source-美团 { border-left-color: #ffc107; }
   .deal-item.source-大众点评 { border-left-color: #03a9f4; }
   .deal-item.source-闲鱼 { border-left-color: #ff9800; }
   .deal-item.source-小红书 { border-left-color: #e91e63; }
-  .deal-item.is-limited {
-    background: linear-gradient(135deg, #f3e5f5, #fce4ec);
-    border-left-color: var(--purple);
-  }
+  .deal-item.is-limited { background: linear-gradient(135deg, #f3e5f5, #fce4ec); border-left-color: var(--purple); }
   .deal-item.is-best { background: linear-gradient(135deg, #fff8e1, #fff3e0); border-left-color: var(--orange); }
   .deal-icon { font-size: 22px; width: 30px; text-align: center; }
   .deal-body { flex: 1; min-width: 0; }
@@ -105,62 +81,134 @@
   .deal-tag.expires { background: #fff3e0; color: var(--orange); font-weight: 400; }
   .deal-tag.best-tag { background: var(--orange); color: #fff; }
   .deal-tag.limited-tag { background: var(--purple); color: #fff; }
-  .deal-arrow { font-size: 16px; color: var(--text3); flex-shrink: 0; }
+  .deal-tag.hint { background: #e8f5e9; color: #388e3c; }
+  .deal-tag.platform { background: #e3f2fd; color: #1976d2; }
+  
   .footer { text-align: center; padding: 10px 0 20px; }
   .footer-hint { font-size: 11px; color: var(--text3); }
   .footer-meta { font-size: 10px; color: #ccc; margin-top: 4px; }
 </style>
 </head>
 <body>
-<div class="container" id="app"></div>
+<div class="container">
+
+  <!-- Header (静态) -->
+  <div class="header">
+    <div class="header-icon">🍣</div>
+    <div class="header-text">
+      <h1>滨寿司优惠速查</h1>
+      <span class="header-sub" id="updateInfo">加载中...</span>
+    </div>
+  </div>
+
+  <!-- 最优推荐 (静态结构，内容JS填充) -->
+  <div id="bestBanner" class="best-banner" style="display:none;">
+    <div class="best-badge" id="bestBadge">🔥 今日最优</div>
+    <div class="best-content">
+      <div class="best-source" id="bestSource"></div>
+      <div class="best-title" id="bestTitle"></div>
+      <div class="best-expires" id="bestExpires"></div>
+    </div>
+    <span class="best-link" id="bestLink">去使用 →</span>
+  </div>
+
+  <!-- 统计 (静态结构，内容JS填充) -->
+  <div class="stats">
+    <div class="stat-item"><span class="stat-num" id="statTotal">0</span><span class="stat-label">优惠总数</span></div>
+    <div class="stat-item"><span class="stat-num" id="statSources">0</span><span class="stat-label">来源</span></div>
+    <div class="stat-item"><span class="stat-num" id="statLimited">0</span><span class="stat-label">限时活动</span></div>
+  </div>
+
+  <!-- 工具栏 (静态，不动) -->
+  <div class="toolbar">
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="搜索优惠..." autocomplete="off">
+    </div>
+    <div class="city-group">
+      <select id="citySelect"></select>
+      <button class="btn-locate" id="btnLocate" title="自动定位">📍</button>
+    </div>
+  </div>
+
+  <!-- 筛选 (静态，不动) -->
+  <div class="filter-bar" id="filterBar">
+    <button class="filter-btn active" data-filter="all">全部</button>
+    <button class="filter-btn" data-filter="美团">美团</button>
+    <button class="filter-btn" data-filter="大众点评">点评</button>
+    <button class="filter-btn" data-filter="闲鱼">闲鱼</button>
+    <button class="filter-btn" data-filter="小红书">小红书</button>
+  </div>
+
+  <!-- 列表 (只这个部分动态更新) -->
+  <div class="deal-list" id="dealList">
+    <div class="empty">加载中...</div>
+  </div>
+
+  <!-- 底部 -->
+  <div class="footer">
+    <span class="footer-hint">优惠由社区贡献，请以门店实际为准</span>
+    <div class="footer-meta" id="footerMeta"></div>
+  </div>
+
+</div>
 
 <script>
-// ====== 滨寿司优惠数据 ======
-// badge:"⏰限时" = 限时短期活动（核心卖点，需经常更新）
-// 无badge = 长期通用优惠（保底用，几乎不过期）
+// ===== 配置 =====
 const DEALS_DATA = {
   "updated_at": "2026-06-04",
   "cities": [
-    {"city":"全国","deals":[
-      // ---- 短期限时优惠（核心价值，优先展示） ----
-      {"id":"mt-hot1","source":"美团","title":"端午节满200减50","detail":"6月10-12日限时3天","badge":"⏰限时","url":"https://meituan.com","expires":"2026-06-12","is_best":true},
-      {"id":"dp-hot1","source":"大众点评","title":"618狂欢6折套餐","detail":"6月18日前可用，限量抢购","badge":"⏰限时","url":"https://dianping.com","expires":"2026-06-18","is_best":false},
-      {"id":"xhs-hot1","source":"小红书","title":"评论区抽10张免单","detail":"关注+评论参与，6月15日开奖","badge":"⏰限时","url":"https://xiaohongshu.com","expires":"2026-06-15","is_best":false},
-      // ---- 长期通用优惠（保底） ----
-      {"id":"mt-001","source":"美团","title":"满100减20","detail":"新老用户均可使用，全场通用","type":"满减","url":"https://meituan.com","expires":"2027-12-31","is_best":false},
-      {"id":"dp-001","source":"大众点评","title":"88元代100元","detail":"每人限购2张，单次可用多张","type":"代金券","url":"https://dianping.com","expires":"2027-12-31","is_best":false},
-      {"id":"xy-001","source":"闲鱼","title":"85折代吃券","detail":"卖家代下单，不限金额","type":"折扣","url":"https://2.taobao.com","expires":"2027-12-31","is_best":false},
-      {"id":"xhs-001","source":"小红书","title":"扫码领随机立减","detail":"到店扫码参与活动，最高减10元","type":"立减","url":"https://xiaohongshu.com","expires":"2027-12-31","is_best":false},
-      {"id":"mt-002","source":"美团","title":"新客专享满50减15","detail":"首次在美团下单可用","type":"满减","url":"https://meituan.com","expires":"2027-12-31","is_best":false},
-      {"id":"dp-002","source":"大众点评","title":"双人套餐168元","detail":"原价198元，含寿司拼盘+饮品","type":"套餐","url":"https://dianping.com","expires":"2027-12-31","is_best":false},
-      {"id":"xy-002","source":"闲鱼","title":"满200减40券￥8","detail":"卖家转让未使用优惠券","type":"满减","url":"https://2.taobao.com","expires":"2027-12-31","is_best":false},
-      {"id":"xhs-002","source":"小红书","title":"关注公众号领5元券","detail":"新关注即可领取","type":"立减","url":"https://xiaohongshu.com","expires":"2027-12-31","is_best":false},
-      {"id":"mt-003","source":"美团","title":"下午茶套餐49元","detail":"14:00-17:00可用","type":"套餐","url":"https://meituan.com","expires":"2027-12-31","is_best":false}
+    {"city":"全国", "label":"全国通用", "deals":[
+      {"id":"mt-hot1","source":"美团","title":"端午节满200减50","detail":"6月10-12日限时3天","badge":"⏰限时","expires":"2026-06-12","is_best":true},
+      {"id":"dp-hot1","source":"大众点评","title":"618狂欢6折套餐","detail":"6月18日前可用","badge":"⏰限时","expires":"2026-06-18","is_best":false},
+      {"id":"xhs-hot1","source":"小红书","title":"评论抽10张免单","detail":"关注+评论参与","badge":"⏰限时","expires":"2026-06-15","is_best":false},
+      {"id":"mt-001","source":"美团","title":"满100减20","detail":"全场通用，新老用户均可","expires":"2027-12-31","is_best":false},
+      {"id":"dp-001","source":"大众点评","title":"88元代100元","detail":"每人限购2张，可叠加","expires":"2027-12-31","is_best":false},
+      {"id":"xy-001","source":"闲鱼","title":"85折代吃券","detail":"卖家代下单，长期有效","expires":"2027-12-31","is_best":false},
+      {"id":"xhs-001","source":"小红书","title":"到店扫码随机立减","detail":"最高减10元","expires":"2027-12-31","is_best":false},
+      {"id":"mt-002","source":"美团","title":"新客满50减15","detail":"首次下单可用","expires":"2027-12-31","is_best":false},
+      {"id":"dp-002","source":"大众点评","title":"双人套餐168元","detail":"原价198元，含寿司拼盘+饮品","expires":"2027-12-31","is_best":false},
+      {"id":"xy-002","source":"闲鱼","title":"满200减40券¥8","detail":"卖家转让未用券","expires":"2027-12-31","is_best":false}
     ]},
     {"city":"上海","deals":[
-      {"id":"sh-hot1","source":"美团","title":"人民广场新店买1送1","detail":"6月整月，新店开业活动","badge":"⏰限时","url":"https://meituan.com","expires":"2026-06-30","is_best":true},
-      {"id":"sh-mt-001","source":"美团","title":"虹桥店专享满120减30","detail":"可叠加会员优惠","type":"满减","url":"https://meituan.com","expires":"2027-12-31","is_best":false},
-      {"id":"sh-dp-001","source":"大众点评","title":"午市套餐88元","detail":"周一至周五 11:00-14:00","type":"套餐","url":"https://dianping.com","expires":"2027-12-31","is_best":false}
+      {"id":"sh-hot1","source":"美团","title":"人民广场新店买1送1","detail":"6月整月","badge":"⏰限时","expires":"2026-06-30","is_best":true},
+      {"id":"sh-mt-001","source":"美团","title":"虹桥店满120减30","detail":"可叠加会员优惠","expires":"2027-12-31","is_best":false},
+      {"id":"sh-dp-001","source":"大众点评","title":"午市套餐88元","detail":"周一至五11:00-14:00","expires":"2027-12-31","is_best":false}
     ]},
     {"city":"北京","deals":[
-      {"id":"bj-hot1","source":"美团","title":"望京店晚市7折","detail":"每周三四，晚8点后","badge":"⏰限时","url":"https://meituan.com","expires":"2026-07-01","is_best":true},
-      {"id":"bj-mt-001","source":"美团","title":"朝阳大悦城店满100减25","detail":"新老顾客均可使用","type":"满减","url":"https://meituan.com","expires":"2027-12-31","is_best":false}
+      {"id":"bj-hot1","source":"美团","title":"望京店晚市7折","detail":"每周三四晚8点后","badge":"⏰限时","expires":"2026-07-01","is_best":true},
+      {"id":"bj-mt-001","source":"美团","title":"朝阳大悦城满100减25","detail":"长期优惠","expires":"2027-12-31","is_best":false}
     ]},
     {"city":"广州","deals":[
-      {"id":"gz-mt-001","source":"美团","title":"天河城店满80减15","detail":"全场通用","type":"满减","url":"https://meituan.com","expires":"2027-12-31","is_best":false}
+      {"id":"gz-mt-001","source":"美团","title":"天河城店满80减15","detail":"周末通用","expires":"2027-12-31","is_best":false}
     ]}
   ]
 };
 
-const SOURCE_ICONS = { '美团':'🛵','大众点评':'📝','闲鱼':'🐟','小红书':'📕' };
+// 所有中国主要城市列表
+const ALL_CITIES = [
+  "全国","北京","上海","广州","深圳","天津","重庆","南京","杭州","成都",
+  "武汉","西安","苏州","郑州","长沙","东莞","青岛","沈阳","宁波","昆明",
+  "大连","厦门","合肥","佛山","福州","哈尔滨","济南","温州","长春","石家庄",
+  "常州","南宁","贵阳","南昌","太原","烟台","海口","珠海","惠州","中山",
+  "兰州","乌鲁木齐","绍兴","泉州","南通","嘉兴","金华","徐州","台州","三亚"
+];
 
-let currentCity = 'all', searchQuery = '', currentFilter = 'all';
+const SOURCE_ICONS = {'美团':'🛵','大众点评':'📝','闲鱼':'🐟','小红书':'📕'};
+const CITY_KEY = 'hamsushi_city';
 
+// ===== 状态 =====
+let currentCity = 'all';
+let currentFilter = 'all';
+let searchQuery = '';
+
+// ===== 工具函数 =====
 function isExpired(d) { if(!d) return false; const p=d.split('-'); return new Date(+p[0],+p[1]-1,+p[2]) < new Date(); }
 function fmtExp(d) { if(!d) return ''; const p=d.split('-'); const dt=new Date(+p[0],+p[1]-1,+p[2]); const diff=Math.ceil((dt-new Date())/86400000); if(diff<0) return '已过期'; if(diff===0) return '今天到期'; if(diff===1) return '明天到期'; if(diff<=7) return diff+'天后到期'; return '有效期至 '+d; }
 
+// ===== 城市检测 =====
 async function detectCity() {
-  const saved = localStorage.getItem('hamsushi_city');
+  const saved = localStorage.getItem(CITY_KEY);
   if (saved && saved !== 'all' && saved !== '全国') return saved;
   try {
     const pos = await new Promise((ok, er) => navigator.geolocation.getCurrentPosition(ok, er, {timeout:8000,enableHighAccuracy:false}));
@@ -169,89 +217,89 @@ async function detectCity() {
     const d = await r.json();
     const city = d.address?.city || d.address?.town || d.address?.county;
     if (city) {
-      const cities = DEALS_DATA.cities.map(c=>c.city).filter(c=>c!=='全国');
-      const match = cities.find(c => city.includes(c) || c.includes(city));
-      if (match) { localStorage.setItem('hamsushi_city', match); return match; }
+      const match = ALL_CITIES.find(c => c!=='全国' && (city.includes(c) || c.includes(city)));
+      if (match) { localStorage.setItem(CITY_KEY, match); return match; }
     }
   } catch(e) {}
   return 'all';
 }
 
+// ===== 渲染列表（只更新 deal-list 部分） =====
 function render() {
-  const app = document.getElementById('app');
+  updateInfo.textContent = '更新于 '+DEALS_DATA.updated_at;
+
+  // 展开所有优惠
   let allDeals = [];
   DEALS_DATA.cities.forEach(c => { c.deals.forEach(d => { d._city = c.city; allDeals.push(d); }); });
 
-  let deals = allDeals;
-  if (currentCity !== 'all' && currentCity !== '全国') deals = allDeals.filter(d => d._city === '全国' || d._city === currentCity);
-  if (searchQuery.trim()) { const q = searchQuery.trim().toLowerCase(); deals = deals.filter(d => d.title.toLowerCase().includes(q) || (d.detail||'').toLowerCase().includes(q) || d.source.toLowerCase().includes(q)); }
-  let filtered = deals;
-  if (currentFilter !== 'all') filtered = deals.filter(d => d.source === currentFilter);
+  // 按城市筛选
+  let cityDeals = allDeals;
+  if (currentCity !== 'all' && currentCity !== '全国') {
+    cityDeals = allDeals.filter(d => d._city === '全国' || d._city === currentCity);
+  }
 
-  // Sort: 限时且未过期优先 → 最优标记 → 一般优惠
-  filtered.sort((a,b) => {
-    const ae = isExpired(a.expires), be = isExpired(b.expires);
-    if (ae !== be) return ae - be;
-    const al = a.badge && !ae ? 1 : 0, bl = b.badge && !be ? 1 : 0;
-    if (al !== bl) return bl - al; // limited deals first
-    if (a.is_best !== b.is_best) return a.is_best ? -1 : 1;
+  // 按搜索词筛选
+  if (searchQuery.trim()) {
+    const q = searchQuery.trim().toLowerCase();
+    cityDeals = cityDeals.filter(d => d.title.toLowerCase().includes(q) || (d.detail||'').toLowerCase().includes(q) || d.source.toLowerCase().includes(q));
+  }
+
+  // 按来源筛选
+  let finalDeals = cityDeals;
+  if (currentFilter !== 'all') finalDeals = cityDeals.filter(d => d.source === currentFilter);
+
+  // 排序：限时未过期→最优→其他
+  finalDeals.sort((a,b) => {
+    const ae=isExpired(a.expires),be=isExpired(b.expires);
+    if(ae!==be) return ae-be;
+    const al=a.badge&&!ae?1:0, bl=b.badge&&!be?1:0;
+    if(al!==bl) return bl-al;
+    if(a.is_best!==b.is_best) return a.is_best?-1:1;
     return 0;
   });
 
-  const activeDeals = allDeals.filter(d => !isExpired(d.expires));
-  const activeLimited = activeDeals.filter(d => d.badge);
-  const bestDeal = activeLimited[0] || activeDeals.find(d=>d.is_best) || activeDeals[0];
+  // 统计
+  const activeAll = allDeals.filter(d=>!isExpired(d.expires));
   const srcSet = new Set(allDeals.map(d=>d.source));
-  const cityOpts = ['全国', ...new Set(DEALS_DATA.cities.map(c=>c.city).filter(c=>c!=='全国'))].map(c => `<option value="${c}">${c==='全国'?'全部城市':c}</option>`).join('');
+  const limitedCount = activeAll.filter(d=>d.badge).length;
+  statTotal.textContent = allDeals.length;
+  statSources.textContent = srcSet.size;
+  statLimited.textContent = limitedCount;
 
-  // Group deals: limited first, then regular
-  const limitedItems = filtered.filter(d => d.badge && !isExpired(d.expires));
-  const regularItems = filtered.filter(d => !d.badge || isExpired(d.expires));
+  // 最优推荐
+  const activeLimited = activeAll.filter(d=>d.badge);
+  const bestDeal = activeLimited[0] || activeAll.find(d=>d.is_best) || activeAll[0];
+  if (bestDeal && bestDeal._city && (currentCity==='all'||currentCity==='全国'||bestDeal._city==='全国'||bestDeal._city===currentCity)) {
+    bestBanner.style.display = 'flex';
+    bestBadge.textContent = activeLimited.length > 0 ? '⏰ 限时推荐' : '🔥 今日最优';
+    bestSource.textContent = bestDeal.source;
+    bestTitle.textContent = bestDeal.title;
+    bestExpires.textContent = fmtExp(bestDeal.expires);
+  } else {
+    bestBanner.style.display = 'none';
+  }
 
-  app.innerHTML = `
-    <div class="header">
-      <div class="header-icon">🍣</div>
-      <div class="header-text">
-        <h1>滨寿司优惠速查</h1>
-        <span class="header-sub">更新于 ${DEALS_DATA.updated_at}</span>
-      </div>
-    </div>
-    ${bestDeal ? `
-    <div class="best-banner">
-      <div class="best-badge">${activeLimited.length > 0 ? '⏰ 限时推荐' : '🔥 今日最优'}</div>
-      <div class="best-content">
-        <div class="best-source">${bestDeal.source}</div>
-        <div class="best-title">${bestDeal.title}</div>
-        <div class="best-expires">${fmtExp(bestDeal.expires)}</div>
-      </div>
-      <a class="best-link" href="${bestDeal.url||'#'}" target="_blank">去使用 →</a>
-    </div>` : ''}
-    <div class="stats">
-      <div class="stat-item"><span class="stat-num">${allDeals.length}</span><span class="stat-label">优惠总数</span></div>
-      <div class="stat-item"><span class="stat-num">${srcSet.size}</span><span class="stat-label">来源平台</span></div>
-      <div class="stat-item"><span class="stat-num">${activeLimited.length}</span><span class="stat-label">限时活动中</span></div>
-    </div>
-    <div class="toolbar">
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" placeholder="搜索优惠..." value="${searchQuery}">
-      </div>
-      <div class="city-group">
-        <select id="citySelect">${cityOpts}</select>
-        <button class="btn-locate" id="btnLocate" title="自动定位">📍</button>
-      </div>
-    </div>
-    <div class="filter-bar" id="filterBar">
-      ${['全部','美团','大众点评','闲鱼','小红书'].map(f => `<button class="filter-btn${currentFilter===f||(f==='全部'&&currentFilter==='all')?' active':''}" data-filter="${f==='全部'?'all':f}">${f}</button>`).join('')}
-    </div>
-    <div class="deal-list">
-      ${filtered.length === 0 ? `
-        <div class="empty"><span class="big-emoji">🔍</span>没有找到匹配的优惠<br>试试其他关键词或筛选条件</div>
-      ` : ''}
-      ${limitedItems.length > 0 ? `
-        <div class="section-label">⏰ 限时活动</div>
+  // 城市提示
+  let cityHint = '';
+  const hasCityDeals = DEALS_DATA.cities.some(c => c.city === currentCity && c.deals.length > 0);
+  if (currentCity !== 'all' && currentCity !== '全国' && !hasCityDeals) {
+    cityHint = `<div class="empty" style="padding:10px 0;">🍣 ${currentCity}暂无专属优惠<br><span style="font-size:12px;color:#999;">以下为全国通用优惠</span></div>`;
+  }
+
+  // 分组
+  const limitedItems = finalDeals.filter(d => d.badge && !isExpired(d.expires));
+  const regularItems = finalDeals.filter(d => !d.badge || isExpired(d.expires));
+  const regActive = regularItems.filter(d => !isExpired(d.expires));
+  const regExpired = regularItems.filter(d => isExpired(d.expires));
+
+  if (finalDeals.length === 0) {
+    dealList.innerHTML = `<div class="empty"><span class="big-emoji">🔍</span>没有找到匹配的优惠<br>试试其他关键词</div>`;
+  } else {
+    dealList.innerHTML = (cityHint ? cityHint : '') + 
+      (limitedItems.length ? `
+        <div class="section-label">⏰ 限时活动（更新于${DEALS_DATA.updated_at}）</div>
         ${limitedItems.map(d => `
-          <div class="deal-item is-limited source-${d.source}" data-url="${d.url||''}">
+          <div class="deal-item is-limited source-${d.source}">
             <div class="deal-icon">${SOURCE_ICONS[d.source]||'📌'}</div>
             <div class="deal-body">
               <div class="deal-title">${d.title}</div>
@@ -260,35 +308,34 @@ function render() {
                 <span class="deal-tag source">${d.source}</span>
                 <span class="deal-tag limited-tag">⏰ 限时</span>
                 <span class="deal-tag expires">${fmtExp(d.expires)}</span>
+                <span class="deal-tag hint">打开${d.source}搜索"滨寿司"</span>
               </div>
             </div>
-            <div class="deal-arrow">→</div>
           </div>
         `).join('')}
-      ` : ''}
-      ${regularItems.filter(d => !isExpired(d.expires)).length > 0 ? `
+      ` : '') +
+      (regActive.length ? `
         <div class="section-label">📌 长期优惠</div>
-        ${regularItems.filter(d => !isExpired(d.expires)).map(d => `
-          <div class="deal-item source-${d.source}${d.is_best?' is-best':''}" data-url="${d.url||''}">
+        ${regActive.map(d => `
+          <div class="deal-item source-${d.source}${d.is_best?' is-best':''}">
             <div class="deal-icon">${SOURCE_ICONS[d.source]||'📌'}</div>
             <div class="deal-body">
               <div class="deal-title">${d.title}</div>
               ${d.detail ? `<div class="deal-detail">${d.detail}</div>` : ''}
               <div class="deal-meta">
                 <span class="deal-tag source">${d.source}</span>
-                ${d.type ? `<span class="deal-tag" style="background:#e3f2fd;color:#1976d2;">${d.type}</span>` : ''}
+                ${d.badge ? `<span class="deal-tag limited-tag">⏰ 限时</span>` : ''}
                 <span class="deal-tag expires">长期有效</span>
-                ${d.is_best ? '<span class="deal-tag best-tag">🔥 推荐</span>' : ''}
+                <span class="deal-tag platform">${d.source}搜索"滨寿司"</span>
               </div>
             </div>
-            <div class="deal-arrow">→</div>
           </div>
         `).join('')}
-      ` : ''}
-      ${regularItems.filter(d => isExpired(d.expires)).length > 0 ? `
-        <div class="section-label" style="color:#ccc;">已过期</div>
-        ${regularItems.filter(d => isExpired(d.expires)).map(d => `
-          <div class="deal-item expired source-${d.source}" style="opacity:.4;" data-url="${d.url||''}">
+      ` : '') +
+      (regExpired.length ? `
+        <div class="section-label" style="color:#ccc;margin-top:8px;">已过期</div>
+        ${regExpired.map(d => `
+          <div class="deal-item source-${d.source}" style="opacity:.4;">
             <div class="deal-icon">${SOURCE_ICONS[d.source]||'📌'}</div>
             <div class="deal-body">
               <div class="deal-title" style="text-decoration:line-through;">${d.title}</div>
@@ -296,25 +343,77 @@ function render() {
             </div>
           </div>
         `).join('')}
-      ` : ''}
-    </div>
-    <div class="footer">
-      <span class="footer-hint">发现新优惠？联系管理员更新</span>
-      <div class="footer-meta">数据更新于 ${DEALS_DATA.updated_at}</div>
-    </div>
-  `;
+      ` : '');
 
-  document.getElementById('searchInput').addEventListener('input', e => { searchQuery = e.target.value; render(); });
-  document.getElementById('citySelect').addEventListener('change', e => { currentCity = e.target.value; localStorage.setItem('hamsushi_city', currentCity==='全国'?'all':currentCity); render(); });
-  document.getElementById('btnLocate').addEventListener('click', async function() { this.classList.add('loading'); this.textContent='⏳'; const c=await detectCity(); this.classList.remove('loading'); this.textContent='📍'; if(c!=='all'){ currentCity=c; document.getElementById('citySelect').value=c; render(); } else { this.textContent='❌'; setTimeout(()=>{this.textContent='📍';},1500); } });
-  document.getElementById('filterBar').addEventListener('click', e => { const b=e.target.closest('.filter-btn'); if(!b) return; currentFilter=b.dataset.filter; render(); });
-  document.querySelectorAll('.deal-item').forEach(el => { el.addEventListener('click', () => { const u=el.dataset.url; if(u) window.open(u, '_blank'); }); });
+    // 底部
+    footerMeta.textContent = '发现新优惠请告诉管理员更新 · '+DEALS_DATA.updated_at;
+  }
 }
 
-(async () => {
-  const saved = localStorage.getItem('hamsushi_city');
-  if (saved && saved !== 'all') currentCity = saved;
-  currentCity = await detectCity();
+// ===== 填充城市下拉框 =====
+function populateCities() {
+  citySelect.innerHTML = ALL_CITIES.map(c => 
+    `<option value="${c}">${c==='全国'?'🀄 全部城市':c}</option>`
+  ).join('');
+  // 如果有保存的城市，选中它
+  const saved = localStorage.getItem(CITY_KEY);
+  if (saved && ALL_CITIES.includes(saved)) {
+    currentCity = saved;
+    citySelect.value = saved;
+  } else {
+    citySelect.value = '全国';
+    currentCity = 'all';
+  }
+}
+
+// ===== 初始化 =====
+document.getElementById('searchInput').addEventListener('input', function() {
+  // 延迟搜索，不重绘输入框，键盘不会消失
+  clearTimeout(this._timer);
+  this._timer = setTimeout(() => {
+    searchQuery = this.value;
+    render();
+  }, 350);
+});
+
+document.getElementById('citySelect').addEventListener('change', function() {
+  currentCity = this.value === '全国' ? 'all' : this.value;
+  localStorage.setItem(CITY_KEY, currentCity === 'all' ? 'all' : currentCity);
+  render();
+});
+
+document.getElementById('btnLocate').addEventListener('click', async function() {
+  this.textContent = '⏳';
+  const c = await detectCity();
+  if (c !== 'all' && c !== '全国') {
+    currentCity = c;
+    citySelect.value = c;
+    localStorage.setItem(CITY_KEY, c);
+    render();
+    this.textContent = '📍';
+  } else {
+    this.textContent = '❌';
+    setTimeout(() => { this.textContent = '📍'; }, 1500);
+  }
+});
+
+document.getElementById('filterBar').addEventListener('click', function(e) {
+  const b = e.target.closest('.filter-btn');
+  if (!b) return;
+  document.querySelectorAll('.filter-btn').forEach(f => f.classList.remove('active'));
+  b.classList.add('active');
+  currentFilter = b.dataset.filter;
+  render();
+});
+
+// ===== 启动 =====
+(async function init() {
+  populateCities();
+  const detected = await detectCity();
+  if (detected !== 'all') {
+    currentCity = detected;
+    citySelect.value = detected;
+  }
   render();
 })();
 </script>
