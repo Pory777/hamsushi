@@ -8,7 +8,8 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
     --red: #d32f2f; --red-light: #ffebee; --red-dark: #b71c1c;
-    --orange: #ff6f00; --bg: #f5f5f5; --card: #ffffff;
+    --orange: #ff6f00; --gold: #ffa000; --purple: #7b1fa2;
+    --bg: #f5f5f5; --card: #ffffff;
     --text: #212121; --text2: #616161; --text3: #9e9e9e;
     --border: #e0e0e0; --radius: 10px;
     --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "PingFang SC", sans-serif;
@@ -72,6 +73,10 @@
     white-space: nowrap; color: var(--text2); transition: all .15s;
   }
   .filter-btn.active { background: var(--red); color: #fff; border-color: var(--red); }
+  .section-label {
+    font-size: 12px; font-weight: 600; color: var(--text2);
+    padding: 6px 0 4px; margin-top: 4px;
+  }
   .deal-list { margin-bottom: 10px; }
   .loading, .empty { text-align: center; color: var(--text3); padding: 40px 20px; font-size: 13px; line-height: 1.8; }
   .empty .big-emoji { font-size: 40px; display: block; margin-bottom: 10px; }
@@ -85,6 +90,10 @@
   .deal-item.source-大众点评 { border-left-color: #03a9f4; }
   .deal-item.source-闲鱼 { border-left-color: #ff9800; }
   .deal-item.source-小红书 { border-left-color: #e91e63; }
+  .deal-item.is-limited {
+    background: linear-gradient(135deg, #f3e5f5, #fce4ec);
+    border-left-color: var(--purple);
+  }
   .deal-item.is-best { background: linear-gradient(135deg, #fff8e1, #fff3e0); border-left-color: var(--orange); }
   .deal-icon { font-size: 22px; width: 30px; text-align: center; }
   .deal-body { flex: 1; min-width: 0; }
@@ -95,6 +104,7 @@
   .deal-tag.source { background: #f5f5f5; color: var(--text2); }
   .deal-tag.expires { background: #fff3e0; color: var(--orange); font-weight: 400; }
   .deal-tag.best-tag { background: var(--orange); color: #fff; }
+  .deal-tag.limited-tag { background: var(--purple); color: #fff; }
   .deal-arrow { font-size: 16px; color: var(--text3); flex-shrink: 0; }
   .footer { text-align: center; padding: 10px 0 20px; }
   .footer-hint { font-size: 11px; color: var(--text3); }
@@ -105,36 +115,39 @@
 <div class="container" id="app"></div>
 
 <script>
-// ===== 优惠数据 =====
-// 通用优惠（如美团满减、大众点评代金券）有效期设到2027年底，不会过期
-// 短期活动可自行修改 expires 字段
+// ====== 滨寿司优惠数据 ======
+// badge:"⏰限时" = 限时短期活动（核心卖点，需经常更新）
+// 无badge = 长期通用优惠（保底用，几乎不过期）
 const DEALS_DATA = {
   "updated_at": "2026-06-04",
   "cities": [
     {"city":"全国","deals":[
-      {"id":"mt-001","source":"美团","title":"满100减20","detail":"新老用户均可使用，全场通用","type":"满减","url":"https://meituan.com","expires":"2027-12-31","is_best":true},
+      // ---- 短期限时优惠（核心价值，优先展示） ----
+      {"id":"mt-hot1","source":"美团","title":"端午节满200减50","detail":"6月10-12日限时3天","badge":"⏰限时","url":"https://meituan.com","expires":"2026-06-12","is_best":true},
+      {"id":"dp-hot1","source":"大众点评","title":"618狂欢6折套餐","detail":"6月18日前可用，限量抢购","badge":"⏰限时","url":"https://dianping.com","expires":"2026-06-18","is_best":false},
+      {"id":"xhs-hot1","source":"小红书","title":"评论区抽10张免单","detail":"关注+评论参与，6月15日开奖","badge":"⏰限时","url":"https://xiaohongshu.com","expires":"2026-06-15","is_best":false},
+      // ---- 长期通用优惠（保底） ----
+      {"id":"mt-001","source":"美团","title":"满100减20","detail":"新老用户均可使用，全场通用","type":"满减","url":"https://meituan.com","expires":"2027-12-31","is_best":false},
       {"id":"dp-001","source":"大众点评","title":"88元代100元","detail":"每人限购2张，单次可用多张","type":"代金券","url":"https://dianping.com","expires":"2027-12-31","is_best":false},
       {"id":"xy-001","source":"闲鱼","title":"85折代吃券","detail":"卖家代下单，不限金额","type":"折扣","url":"https://2.taobao.com","expires":"2027-12-31","is_best":false},
       {"id":"xhs-001","source":"小红书","title":"扫码领随机立减","detail":"到店扫码参与活动，最高减10元","type":"立减","url":"https://xiaohongshu.com","expires":"2027-12-31","is_best":false},
-      {"id":"mt-002","source":"美团","title":"新客专享满50减15","detail":"首次在美团下单滨寿司可用","type":"满减","url":"https://meituan.com","expires":"2027-12-31","is_best":false},
-      {"id":"dp-002","source":"大众点评","title":"双人套餐168元","detail":"原价198元，含精选寿司拼盘+饮品2杯","type":"套餐","url":"https://dianping.com","expires":"2027-12-31","is_best":false},
-      {"id":"xy-002","source":"闲鱼","title":"满200减40券 ￥8","detail":"卖家转让未使用优惠券，拍下发码","type":"满减","url":"https://2.taobao.com","expires":"2027-12-31","is_best":false},
-      {"id":"xhs-002","source":"小红书","title":"关注公众号领5元券","detail":"滨寿司公众号新关注可领取","type":"立减","url":"https://xiaohongshu.com","expires":"2027-12-31","is_best":false},
-      {"id":"mt-003","source":"美团","title":"下午茶套餐49元","detail":"14:00-17:00可用，含寿司拼盘+饮品","type":"套餐","url":"https://meituan.com","expires":"2027-12-31","is_best":false},
-      {"id":"dp-003","source":"大众点评","title":"亲子套餐198元","detail":"含儿童寿司套餐+成人寿司拼盘","type":"套餐","url":"https://dianping.com","expires":"2027-12-31","is_best":false},
-      {"id":"xy-003","source":"闲鱼","title":"会员日免单券转让 ￥15","detail":"每月会员日可用，全单免费","type":"免单","url":"https://2.taobao.com","expires":"2027-12-31","is_best":true}
+      {"id":"mt-002","source":"美团","title":"新客专享满50减15","detail":"首次在美团下单可用","type":"满减","url":"https://meituan.com","expires":"2027-12-31","is_best":false},
+      {"id":"dp-002","source":"大众点评","title":"双人套餐168元","detail":"原价198元，含寿司拼盘+饮品","type":"套餐","url":"https://dianping.com","expires":"2027-12-31","is_best":false},
+      {"id":"xy-002","source":"闲鱼","title":"满200减40券￥8","detail":"卖家转让未使用优惠券","type":"满减","url":"https://2.taobao.com","expires":"2027-12-31","is_best":false},
+      {"id":"xhs-002","source":"小红书","title":"关注公众号领5元券","detail":"新关注即可领取","type":"立减","url":"https://xiaohongshu.com","expires":"2027-12-31","is_best":false},
+      {"id":"mt-003","source":"美团","title":"下午茶套餐49元","detail":"14:00-17:00可用","type":"套餐","url":"https://meituan.com","expires":"2027-12-31","is_best":false}
     ]},
     {"city":"上海","deals":[
-      {"id":"sh-mt-001","source":"美团","title":"虹桥店专享满120减30","detail":"仅限虹桥店使用，可与会员优惠叠加","type":"满减","url":"https://meituan.com","expires":"2027-12-31","is_best":true},
-      {"id":"sh-dp-001","source":"大众点评","title":"午市套餐88元","detail":"周一至周五 11:00-14:00 可用","type":"套餐","url":"https://dianping.com","expires":"2027-12-31","is_best":false},
-      {"id":"sh-mt-002","source":"美团","title":"人民广场店满150减35","detail":"新店开业特惠，仅限人民广场店","type":"满减","url":"https://meituan.com","expires":"2027-12-31","is_best":false}
+      {"id":"sh-hot1","source":"美团","title":"人民广场新店买1送1","detail":"6月整月，新店开业活动","badge":"⏰限时","url":"https://meituan.com","expires":"2026-06-30","is_best":true},
+      {"id":"sh-mt-001","source":"美团","title":"虹桥店专享满120减30","detail":"可叠加会员优惠","type":"满减","url":"https://meituan.com","expires":"2027-12-31","is_best":false},
+      {"id":"sh-dp-001","source":"大众点评","title":"午市套餐88元","detail":"周一至周五 11:00-14:00","type":"套餐","url":"https://dianping.com","expires":"2027-12-31","is_best":false}
     ]},
     {"city":"北京","deals":[
-      {"id":"bj-mt-001","source":"美团","title":"朝阳大悦城店满100减25","detail":"长期优惠，新老顾客均可使用","type":"满减","url":"https://meituan.com","expires":"2027-12-31","is_best":true},
-      {"id":"bj-dp-001","source":"大众点评","title":"三里屯店满200减50","detail":"专区优惠，可与店内活动叠加","type":"满减","url":"https://dianping.com","expires":"2027-12-31","is_best":false}
+      {"id":"bj-hot1","source":"美团","title":"望京店晚市7折","detail":"每周三四，晚8点后","badge":"⏰限时","url":"https://meituan.com","expires":"2026-07-01","is_best":true},
+      {"id":"bj-mt-001","source":"美团","title":"朝阳大悦城店满100减25","detail":"新老顾客均可使用","type":"满减","url":"https://meituan.com","expires":"2027-12-31","is_best":false}
     ]},
     {"city":"广州","deals":[
-      {"id":"gz-mt-001","source":"美团","title":"天河城店满80减15","detail":"周末特惠，全场通用","type":"满减","url":"https://meituan.com","expires":"2027-12-31","is_best":true}
+      {"id":"gz-mt-001","source":"美团","title":"天河城店满80减15","detail":"全场通用","type":"满减","url":"https://meituan.com","expires":"2027-12-31","is_best":false}
     ]}
   ]
 };
@@ -168,41 +181,55 @@ function render() {
   const app = document.getElementById('app');
   let allDeals = [];
   DEALS_DATA.cities.forEach(c => { c.deals.forEach(d => { d._city = c.city; allDeals.push(d); }); });
+
   let deals = allDeals;
   if (currentCity !== 'all' && currentCity !== '全国') deals = allDeals.filter(d => d._city === '全国' || d._city === currentCity);
   if (searchQuery.trim()) { const q = searchQuery.trim().toLowerCase(); deals = deals.filter(d => d.title.toLowerCase().includes(q) || (d.detail||'').toLowerCase().includes(q) || d.source.toLowerCase().includes(q)); }
   let filtered = deals;
   if (currentFilter !== 'all') filtered = deals.filter(d => d.source === currentFilter);
-  filtered.sort((a,b) => { const ae=isExpired(a.expires),be=isExpired(b.expires); if(ae!==be) return ae-be; if(a.is_best!==b.is_best) return a.is_best?-1:1; return 0; });
+
+  // Sort: 限时且未过期优先 → 最优标记 → 一般优惠
+  filtered.sort((a,b) => {
+    const ae = isExpired(a.expires), be = isExpired(b.expires);
+    if (ae !== be) return ae - be;
+    const al = a.badge && !ae ? 1 : 0, bl = b.badge && !be ? 1 : 0;
+    if (al !== bl) return bl - al; // limited deals first
+    if (a.is_best !== b.is_best) return a.is_best ? -1 : 1;
+    return 0;
+  });
 
   const activeDeals = allDeals.filter(d => !isExpired(d.expires));
-  const hasExpiredAll = activeDeals.length === 0;
+  const activeLimited = activeDeals.filter(d => d.badge);
+  const bestDeal = activeLimited[0] || activeDeals.find(d=>d.is_best) || activeDeals[0];
   const srcSet = new Set(allDeals.map(d=>d.source));
-  const bestDeal = allDeals.find(d=>d.is_best&&!isExpired(d.expires)) || activeDeals[0];
   const cityOpts = ['全国', ...new Set(DEALS_DATA.cities.map(c=>c.city).filter(c=>c!=='全国'))].map(c => `<option value="${c}">${c==='全国'?'全部城市':c}</option>`).join('');
+
+  // Group deals: limited first, then regular
+  const limitedItems = filtered.filter(d => d.badge && !isExpired(d.expires));
+  const regularItems = filtered.filter(d => !d.badge || isExpired(d.expires));
 
   app.innerHTML = `
     <div class="header">
       <div class="header-icon">🍣</div>
       <div class="header-text">
         <h1>滨寿司优惠速查</h1>
-        <span class="header-sub">${DEALS_DATA.updated_at||''}</span>
+        <span class="header-sub">更新于 ${DEALS_DATA.updated_at}</span>
       </div>
     </div>
-    ${!hasExpiredAll && bestDeal ? `
+    ${bestDeal ? `
     <div class="best-banner">
-      <div class="best-badge">🔥 今日最优</div>
+      <div class="best-badge">${activeLimited.length > 0 ? '⏰ 限时推荐' : '🔥 今日最优'}</div>
       <div class="best-content">
         <div class="best-source">${bestDeal.source}</div>
         <div class="best-title">${bestDeal.title}</div>
-        <div class="best-expires">${bestDeal.expires ? '有效期至 '+bestDeal.expires : ''}</div>
+        <div class="best-expires">${fmtExp(bestDeal.expires)}</div>
       </div>
       <a class="best-link" href="${bestDeal.url||'#'}" target="_blank">去使用 →</a>
     </div>` : ''}
     <div class="stats">
       <div class="stat-item"><span class="stat-num">${allDeals.length}</span><span class="stat-label">优惠总数</span></div>
       <div class="stat-item"><span class="stat-num">${srcSet.size}</span><span class="stat-label">来源平台</span></div>
-      <div class="stat-item"><span class="stat-num">${activeDeals.length}</span><span class="stat-label">有效中</span></div>
+      <div class="stat-item"><span class="stat-num">${activeLimited.length}</span><span class="stat-label">限时活动中</span></div>
     </div>
     <div class="toolbar">
       <div class="search-box">
@@ -218,33 +245,61 @@ function render() {
       ${['全部','美团','大众点评','闲鱼','小红书'].map(f => `<button class="filter-btn${currentFilter===f||(f==='全部'&&currentFilter==='all')?' active':''}" data-filter="${f==='全部'?'all':f}">${f}</button>`).join('')}
     </div>
     <div class="deal-list">
-      ${hasExpiredAll ? `
-        <div class="empty">
-          <span class="big-emoji">🔍</span>
-          暂无语动中的优惠<br>管理员正在更新数据，请稍后再来看看
-        </div>
-      ` : filtered.length === 0 ? `
+      ${filtered.length === 0 ? `
         <div class="empty"><span class="big-emoji">🔍</span>没有找到匹配的优惠<br>试试其他关键词或筛选条件</div>
-      ` : filtered.map(d => {
-        const expired = isExpired(d.expires);
-        return `<div class="deal-item source-${d.source}${d.is_best&&!expired?' is-best':''}" data-url="${d.url||''}">
-          <div class="deal-icon">${SOURCE_ICONS[d.source]||'📌'}</div>
-          <div class="deal-body">
-            <div class="deal-title">${d.title}</div>
-            ${d.detail ? `<div class="deal-detail">${d.detail}</div>` : ''}
-            <div class="deal-meta">
-              <span class="deal-tag source">${d.source}</span>
-              ${d._city&&d._city!=='全国' ? `<span class="deal-tag" style="background:#e8f5e9;color:#388e3c;">${d._city}</span>` : ''}
-              ${d.type ? `<span class="deal-tag" style="background:#e3f2fd;color:#1976d2;">${d.type}</span>` : ''}
-              <span class="deal-tag expires">${fmtExp(d.expires)}</span>
-              ${d.is_best&&!expired ? '<span class="deal-tag best-tag">🔥 最优</span>' : ''}
+      ` : ''}
+      ${limitedItems.length > 0 ? `
+        <div class="section-label">⏰ 限时活动</div>
+        ${limitedItems.map(d => `
+          <div class="deal-item is-limited source-${d.source}" data-url="${d.url||''}">
+            <div class="deal-icon">${SOURCE_ICONS[d.source]||'📌'}</div>
+            <div class="deal-body">
+              <div class="deal-title">${d.title}</div>
+              ${d.detail ? `<div class="deal-detail">${d.detail}</div>` : ''}
+              <div class="deal-meta">
+                <span class="deal-tag source">${d.source}</span>
+                <span class="deal-tag limited-tag">⏰ 限时</span>
+                <span class="deal-tag expires">${fmtExp(d.expires)}</span>
+              </div>
+            </div>
+            <div class="deal-arrow">→</div>
+          </div>
+        `).join('')}
+      ` : ''}
+      ${regularItems.filter(d => !isExpired(d.expires)).length > 0 ? `
+        <div class="section-label">📌 长期优惠</div>
+        ${regularItems.filter(d => !isExpired(d.expires)).map(d => `
+          <div class="deal-item source-${d.source}${d.is_best?' is-best':''}" data-url="${d.url||''}">
+            <div class="deal-icon">${SOURCE_ICONS[d.source]||'📌'}</div>
+            <div class="deal-body">
+              <div class="deal-title">${d.title}</div>
+              ${d.detail ? `<div class="deal-detail">${d.detail}</div>` : ''}
+              <div class="deal-meta">
+                <span class="deal-tag source">${d.source}</span>
+                ${d.type ? `<span class="deal-tag" style="background:#e3f2fd;color:#1976d2;">${d.type}</span>` : ''}
+                <span class="deal-tag expires">长期有效</span>
+                ${d.is_best ? '<span class="deal-tag best-tag">🔥 推荐</span>' : ''}
+              </div>
+            </div>
+            <div class="deal-arrow">→</div>
+          </div>
+        `).join('')}
+      ` : ''}
+      ${regularItems.filter(d => isExpired(d.expires)).length > 0 ? `
+        <div class="section-label" style="color:#ccc;">已过期</div>
+        ${regularItems.filter(d => isExpired(d.expires)).map(d => `
+          <div class="deal-item expired source-${d.source}" style="opacity:.4;" data-url="${d.url||''}">
+            <div class="deal-icon">${SOURCE_ICONS[d.source]||'📌'}</div>
+            <div class="deal-body">
+              <div class="deal-title" style="text-decoration:line-through;">${d.title}</div>
+              <div class="deal-meta"><span class="deal-tag expires">已过期</span></div>
             </div>
           </div>
-          <div class="deal-arrow">→</div>
-        </div>`;}).join('')}
+        `).join('')}
+      ` : ''}
     </div>
     <div class="footer">
-      <span class="footer-hint">优惠信息由社区提交，请以门店实际为准</span>
+      <span class="footer-hint">发现新优惠？联系管理员更新</span>
       <div class="footer-meta">数据更新于 ${DEALS_DATA.updated_at}</div>
     </div>
   `;
