@@ -148,6 +148,42 @@
 </div>
 
 <script>
+// 自动加载最新优惠数据
+(async function loadLatestDeals() {
+  try {
+    const resp = await fetch('./data/deals.json');
+    const data = await resp.json();
+    if (data && data.cities && data.cities.length > 0) {
+      const newList = [];
+      for (const city of data.cities) {
+        for (const d of city.deals) {
+          newList.push({
+            id: d.id || (d.platform || d.source || '其他') + '-' + Math.random().toString(36).slice(2,6),
+            src: d.platform || d.source || '其他',
+            title: d.title || '',
+            detail: d.detail || (d.value ? '仅¥' + d.price : ''),
+            badge: d.type === '代金券' ? '代金券' : (d.price ? '限时' : ''),
+            url: d.url || '',
+            expire: d.expires || '2027-12-31',
+            best: d.is_best || false,
+            city: city.city || '全国',
+          });
+        }
+      }
+      if (newList.length > 0) {
+        // 合并到 DEALS，保留硬编码数据作为补充
+        const existing = DEALS.list.filter(e => !newList.find(n => n.url && n.url === e.url));
+        DEALS.list = [...newList, ...existing];
+        DEALS.updated = data.updated_at || new Date().toISOString().slice(0, 16).replace('T', ' ');
+        render();
+      }
+    }
+  } catch(e) {
+    // 加载失败时使用硬编码数据
+    console.log('使用本地数据');
+  }
+})();
+
 const DEALS = {
   "updated":"2026-06-04",
   "list":[
