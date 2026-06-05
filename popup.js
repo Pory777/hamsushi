@@ -1,5 +1,5 @@
 // ===== Configuration =====
-const DATA_URL = 'https://raw.githubusercontent.com/hamsushi-fans/hamsushi-coupon/main/data/deals.json';
+const DATA_URL = 'https://raw.githubusercontent.com/Pory777/hamsushi/main/data/deals.json';
 const CACHE_KEY = 'hamsushi_deals_cache';
 const CITY_KEY = 'preferredCity';
 const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
