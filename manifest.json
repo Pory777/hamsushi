@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "滨寿司优惠速查",
+  "short_name": "滨寿司优惠",
+  "version": "1.1.0",
+  "description": "一键查看滨寿司全网最低价优惠券，覆盖美团、大众点评、闲鱼、小红书等渠道。吃滨寿司前查一下，每次都省几块钱。",
+  "author": "hamsushi-fans",
+  "homepage_url": "https://github.com/hamsushi-fans/hamsushi-coupon",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "滨寿司优惠速查",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [],
+  "web_accessible_resources": [
+    {
+      "resources": ["data/deals.json"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "hamsushi-coupon@example.com",
+      "strict_min_version": "109.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  }
+}

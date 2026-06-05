@@ -1,0 +1,6 @@
+# API Keys（不提交到仓库）
+auto_finder/config.py
+
+# Python
+__pycache__/
+*.pyc

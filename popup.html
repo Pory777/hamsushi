@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=380">
+  <title>滨寿司优惠速查</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-icon">🍣</div>
+      <div class="header-text">
+        <h1>滨寿司优惠速查</h1>
+        <span class="header-sub" id="updateInfo">加载中...</span>
+      </div>
+      <button class="btn-refresh" id="btnRefresh" title="刷新优惠数据">⟳</button>
+    </header>
+
+    <!-- Best Deal Banner -->
+    <div class="best-banner" id="bestBanner">
+      <div class="best-badge">🔥 今日最优</div>
+      <div class="best-content">
+        <span class="best-source" id="bestSource">-</span>
+        <span class="best-title" id="bestTitle">-</span>
+        <span class="best-expires" id="bestExpires">-</span>
+      </div>
+      <a class="best-link" id="bestLink" href="#" target="_blank">去使用 →</a>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+      <span class="stat-item">
+        <span class="stat-num" id="statTotal">0</span>
+        <span class="stat-label">优惠总数</span>
+      </span>
+      <span class="stat-item">
+        <span class="stat-num" id="statSources">0</span>
+        <span class="stat-label">来源平台</span>
+      </span>
+      <span class="stat-item">
+        <span class="stat-num" id="statActive">0</span>
+        <span class="stat-label">有效中</span>
+      </span>
+    </div>
+
+    <!-- Toolbar: Search + City -->
+    <div class="toolbar">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="搜索优惠...">
+      </div>
+      <div class="city-selector">
+        <select id="citySelect"></select>
+        <button class="btn-locate" id="btnLocate" title="自动定位">📍</button>
+      </div>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-btn active" data-filter="all">全部</button>
+      <button class="filter-btn" data-filter="美团">美团</button>
+      <button class="filter-btn" data-filter="大众点评">点评</button>
+      <button class="filter-btn" data-filter="闲鱼">闲鱼</button>
+      <button class="filter-btn" data-filter="小红书">小红书</button>
+    </div>
+
+    <!-- Deal List -->
+    <div class="deal-list" id="dealList">
+      <div class="loading">加载优惠信息...</div>
+    </div>
+
+    <!-- Footer Actions -->
+    <div class="footer">
+      <button class="btn-action" id="btnSubmit">✉ 向开发者提交优惠</button>
+      <span class="footer-hint">提交的优惠需经管理员审核后发布</span>
+    </div>
+
+    <!-- Submit Modal -->
+    <div class="modal-overlay" id="submitModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h2>向开发者提交优惠</h2>
+          <button class="modal-close" id="modalClose">✕</button>
+        </div>
+        <p class="modal-desc">发现新的滨寿司优惠？填好信息后提交，管理员审核通过后就会更新到插件中，所有用户都能看到。</p>
+        <form class="submit-form" id="submitForm">
+          <div class="form-group">
+            <label>来源平台</label>
+            <select id="formSource" required>
+              <option value="">请选择</option>
+              <option value="美团">美团</option>
+              <option value="大众点评">大众点评</option>
+              <option value="闲鱼">闲鱼</option>
+              <option value="小红书">小红书</option>
+              <option value="其他">其他</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>优惠标题</label>
+            <input type="text" id="formTitle" placeholder="例：满100减20" required>
+          </div>
+          <div class="form-group">
+            <label>优惠详情</label>
+            <input type="text" id="formDetail" placeholder="例：满100元减20元，全场通用">
+          </div>
+          <div class="form-group">
+            <label>链接/口令</label>
+            <input type="text" id="formUrl" placeholder="优惠券链接或领取口令">
+          </div>
+          <div class="form-group">
+            <label>有效期至</label>
+            <input type="date" id="formExpires">
+          </div>
+          <div class="form-group">
+            <label>所在城市</label>
+            <input type="text" id="formCity" placeholder="全国 / 上海 / 北京...">
+          </div>
+          <button type="submit" class="btn-submit">提交优惠（管理员审核后发布）</button>
+          <p class="form-note">提交后我们会尽快核实并更新，感谢你的贡献！</p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

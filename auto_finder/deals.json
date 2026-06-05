@@ -1,0 +1,133 @@
+{
+  "updated_at": "2026-06-05 19:09",
+  "keyword": "滨寿司",
+  "stats": {
+    "total": 9,
+    "passed": 0,
+    "published": 9
+  },
+  "cities": [
+    {
+      "city": "全国",
+      "deals": [
+        {
+          "id": "闲鱼-8945",
+          "source": "闲鱼",
+          "title": "滨寿司满200减40转让券",
+          "detail": "8元买40元券",
+          "type": "通用",
+          "url": "",
+          "price": 8.0,
+          "expires": "2027-12-31",
+          "is_best": true,
+          "source_api": "淘宝联盟",
+          "verified": false
+        },
+        {
+          "id": "抖音-2322",
+          "source": "抖音",
+          "title": "滨寿司广州天河城店满80减15",
+          "detail": "天河城店抖音专属",
+          "type": "门店",
+          "url": "",
+          "price": 65.0,
+          "expires": "2027-12-31",
+          "is_best": false,
+          "source_api": "抖音开放平台",
+          "verified": false
+        },
+        {
+          "id": "美团-9336",
+          "source": "美团",
+          "title": "滨寿司北京朝阳大悦城店满100减25",
+          "detail": "朝阳大悦城店专享",
+          "type": "门店",
+          "url": "",
+          "price": 75.0,
+          "expires": "2027-12-31",
+          "is_best": false,
+          "source_api": "美团联盟",
+          "verified": false
+        },
+        {
+          "id": "美团-2703",
+          "source": "美团",
+          "title": "滨寿司满100减20团购券",
+          "detail": "全场通用，不限时段",
+          "type": "通用",
+          "url": "",
+          "price": 80.0,
+          "expires": "2027-12-31",
+          "is_best": false,
+          "source_api": "美团联盟",
+          "verified": false
+        },
+        {
+          "id": "闲鱼-7073",
+          "source": "闲鱼",
+          "title": "滨寿司85折代吃券",
+          "detail": "卖家代下单，长期有效",
+          "type": "通用",
+          "url": "",
+          "price": 85.0,
+          "expires": "2027-12-31",
+          "is_best": false,
+          "source_api": "淘宝联盟",
+          "verified": false
+        },
+        {
+          "id": "大众点评-839",
+          "source": "大众点评",
+          "title": "滨寿司88元代100元代金券",
+          "detail": "可叠加使用",
+          "type": "通用",
+          "url": "",
+          "price": 88.0,
+          "expires": "2027-12-31",
+          "is_best": false,
+          "source_api": "美团联盟",
+          "verified": false
+        },
+        {
+          "id": "淘宝-5461",
+          "source": "淘宝",
+          "title": "滨寿司限量周边套餐",
+          "detail": "含寿司券+周边礼品",
+          "type": "通用",
+          "url": "",
+          "price": 99.0,
+          "expires": "2027-12-31",
+          "is_best": false,
+          "source_api": "淘宝联盟",
+          "verified": false
+        },
+        {
+          "id": "抖音-728",
+          "source": "抖音",
+          "title": "滨寿司超值双人餐团购券",
+          "detail": "抖音团购专享价",
+          "type": "通用",
+          "url": "",
+          "price": 128.0,
+          "expires": "2027-12-31",
+          "is_best": false,
+          "source_api": "抖音开放平台",
+          "verified": false
+        },
+        {
+          "id": "大众点评-744",
+          "source": "大众点评",
+          "title": "滨寿司上海人民广场店双人套餐168元",
+          "detail": "原价198，含寿司拼盘+饮品",
+          "type": "门店",
+          "url": "",
+          "price": 168.0,
+          "expires": "2027-12-31",
+          "is_best": false,
+          "source_api": "美团联盟",
+          "verified": false
+        }
+      ]
+    }
+  ]
+}
